@@ -1,0 +1,39 @@
+configVersion: 1.0.0
+management:
+  docChecksum: abbc3a8faac54f76013e5d509a8d11ec
+  docVersion: 1.0.0
+  speakeasyVersion: 1.111.0
+  generationVersion: 2.173.0
+generation:
+  comments:
+    disableComments: false
+    omitDescriptionIfSummaryPresent: false
+  baseServerURL: ""
+  devContainers:
+    enabled: true
+    schemaPath: ./openapi.yaml
+  repoURL: https://github.com/speakeasy-sdks/template-speakeasy-bar.git
+  sdkClassName: speakeasy
+  singleTagPerOp: false
+  tagNamespacingDisabled: false
+  telemetryEnabled: false
+features:
+  go:
+    core: 2.94.0
+    devContainers: 2.90.0
+    errors: 2.81.7
+    examples: 2.81.3
+    flattening: 2.81.1
+    globalSecurity: 2.82.2
+    globalServerURLs: 2.82.0
+    inputOutputModels: 2.81.1
+    serverIDs: 2.81.1
+go:
+  version: 0.6.0
+  clientServerStatusCodesAsErrors: true
+  flattenGlobalSecurity: true
+  installationURL: https://github.com/speakeasy-sdks/template-speakeasy-bar
+  maxMethodParams: 4
+  packageName: github.com/speakeasy-sdks/template-speakeasy-bar
+  published: true
+  repoSubDirectory: .
