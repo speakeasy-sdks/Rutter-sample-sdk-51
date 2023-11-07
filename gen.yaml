@@ -2,24 +2,18 @@ configVersion: 1.0.0
 management:
   docChecksum: abbc3a8faac54f76013e5d509a8d11ec
   docVersion: 1.0.0
-  speakeasyVersion: 1.111.0
-  generationVersion: 2.173.0
+  speakeasyVersion: 1.114.1
+  generationVersion: 2.181.1
 generation:
-  comments:
-    disableComments: false
-    omitDescriptionIfSummaryPresent: false
-  baseServerURL: ""
+  comments: {}
   devContainers:
     enabled: true
     schemaPath: ./openapi.yaml
-  repoURL: https://github.com/speakeasy-sdks/template-speakeasy-bar.git
   sdkClassName: speakeasy
-  singleTagPerOp: false
-  tagNamespacingDisabled: false
-  telemetryEnabled: false
+  repoURL: https://github.com/speakeasy-sdks/Rutter-sample-sdk-51.git
 features:
   go:
-    core: 2.94.0
+    core: 3.1.0
     devContainers: 2.90.0
     errors: 2.81.7
     examples: 2.81.3
@@ -29,10 +23,18 @@ features:
     inputOutputModels: 2.81.1
     serverIDs: 2.81.1
 go:
-  version: 0.6.0
+  version: 0.7.0
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
-  installationURL: https://github.com/speakeasy-sdks/template-speakeasy-bar
+  imports:
+    option: openapi
+    paths:
+      callbacks: pkg/models/callbacks
+      errors: pkg/models/sdkerrors
+      operations: pkg/models/operations
+      shared: pkg/models/shared
+      webhooks: pkg/models/webhooks
+  installationURL: https://github.com/speakeasy-sdks/Rutter-sample-sdk-51
   maxMethodParams: 4
   packageName: github.com/speakeasy-sdks/template-speakeasy-bar
   published: true

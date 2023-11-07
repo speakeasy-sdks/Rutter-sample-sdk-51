@@ -1,5 +1,5 @@
 # Authentication
-(*Authentication*)
+(*.Authentication*)
 
 ## Overview
 
@@ -37,7 +37,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Authenticate200ApplicationJSONObject != nil {
+    if res.Object != nil {
         // handle response
     }
 }

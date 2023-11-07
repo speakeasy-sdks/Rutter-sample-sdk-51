@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// The ingredients endpoints.
-type ingredients struct {
+// Ingredients - The ingredients endpoints.
+type Ingredients struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newIngredients(sdkConfig sdkConfiguration) *ingredients {
-	return &ingredients{
+func newIngredients(sdkConfig sdkConfiguration) *Ingredients {
+	return &Ingredients{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // ListIngredients - Get a list of ingredients.
 // Get a list of ingredients, if authenticated this will include stock levels and product codes otherwise it will only include public information.
-func (s *ingredients) ListIngredients(ctx context.Context, ingredients []string) (*operations.ListIngredientsResponse, error) {
+func (s *Ingredients) ListIngredients(ctx context.Context, ingredients []string) (*operations.ListIngredientsResponse, error) {
 	request := operations.ListIngredientsRequest{
 		Ingredients: ingredients,
 	}
@@ -80,7 +80,7 @@ func (s *ingredients) ListIngredients(ctx context.Context, ingredients []string)
 				return nil, err
 			}
 
-			res.Ingredients = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

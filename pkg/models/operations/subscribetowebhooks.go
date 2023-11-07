@@ -9,43 +9,43 @@ import (
 	"net/http"
 )
 
-type SubscribeToWebhooksRequestBodyWebhook string
+type Webhook string
 
 const (
-	SubscribeToWebhooksRequestBodyWebhookStockUpdate SubscribeToWebhooksRequestBodyWebhook = "stockUpdate"
+	WebhookStockUpdate Webhook = "stockUpdate"
 )
 
-func (e SubscribeToWebhooksRequestBodyWebhook) ToPointer() *SubscribeToWebhooksRequestBodyWebhook {
+func (e Webhook) ToPointer() *Webhook {
 	return &e
 }
 
-func (e *SubscribeToWebhooksRequestBodyWebhook) UnmarshalJSON(data []byte) error {
+func (e *Webhook) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "stockUpdate":
-		*e = SubscribeToWebhooksRequestBodyWebhook(v)
+		*e = Webhook(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for SubscribeToWebhooksRequestBodyWebhook: %v", v)
+		return fmt.Errorf("invalid value for Webhook: %v", v)
 	}
 }
 
-type SubscribeToWebhooksRequestBody struct {
-	URL     *string                                `json:"url,omitempty"`
-	Webhook *SubscribeToWebhooksRequestBodyWebhook `json:"webhook,omitempty"`
+type RequestBody struct {
+	URL     *string  `json:"url,omitempty"`
+	Webhook *Webhook `json:"webhook,omitempty"`
 }
 
-func (o *SubscribeToWebhooksRequestBody) GetURL() *string {
+func (o *RequestBody) GetURL() *string {
 	if o == nil {
 		return nil
 	}
 	return o.URL
 }
 
-func (o *SubscribeToWebhooksRequestBody) GetWebhook() *SubscribeToWebhooksRequestBodyWebhook {
+func (o *RequestBody) GetWebhook() *Webhook {
 	if o == nil {
 		return nil
 	}

@@ -1,5 +1,5 @@
 # Ingredients
-(*Ingredients*)
+(*.Ingredients*)
 
 ## Overview
 
@@ -41,7 +41,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Ingredients != nil {
+    if res.Classes != nil {
         // handle response
     }
 }

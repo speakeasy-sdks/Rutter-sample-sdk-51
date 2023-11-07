@@ -24,12 +24,12 @@ type ListIngredientsResponse struct {
 	ContentType string
 	// An unknown error occurred interacting with the API.
 	Error *shared.Error
-	// A list of ingredients.
-	Ingredients []shared.Ingredient
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// A list of ingredients.
+	Classes []shared.Ingredient
 }
 
 func (o *ListIngredientsResponse) GetContentType() string {
@@ -46,13 +46,6 @@ func (o *ListIngredientsResponse) GetError() *shared.Error {
 	return o.Error
 }
 
-func (o *ListIngredientsResponse) GetIngredients() []shared.Ingredient {
-	if o == nil {
-		return nil
-	}
-	return o.Ingredients
-}
-
 func (o *ListIngredientsResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
@@ -65,4 +58,11 @@ func (o *ListIngredientsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *ListIngredientsResponse) GetClasses() []shared.Ingredient {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }
