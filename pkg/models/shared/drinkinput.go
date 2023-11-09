@@ -2,48 +2,39 @@
 
 package shared
 
-type Drink struct {
+type DrinkInput struct {
 	// The name of the drink.
 	Name string `json:"name"`
 	// The price of one unit of the drink in US cents.
 	Price float64 `json:"price"`
 	// The product code of the drink, only available when authenticated.
 	ProductCode *string `json:"productCode,omitempty"`
-	// The number of units of the drink in stock, only available when authenticated.
-	Stock *int64 `json:"stock,omitempty"`
 	// The type of drink.
 	Type *DrinkType `json:"type,omitempty"`
 }
 
-func (o *Drink) GetName() string {
+func (o *DrinkInput) GetName() string {
 	if o == nil {
 		return ""
 	}
 	return o.Name
 }
 
-func (o *Drink) GetPrice() float64 {
+func (o *DrinkInput) GetPrice() float64 {
 	if o == nil {
 		return 0.0
 	}
 	return o.Price
 }
 
-func (o *Drink) GetProductCode() *string {
+func (o *DrinkInput) GetProductCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ProductCode
 }
 
-func (o *Drink) GetStock() *int64 {
-	if o == nil {
-		return nil
-	}
-	return o.Stock
-}
-
-func (o *Drink) GetType() *DrinkType {
+func (o *DrinkInput) GetType() *DrinkType {
 	if o == nil {
 		return nil
 	}

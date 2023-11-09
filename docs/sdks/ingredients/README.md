@@ -1,5 +1,5 @@
 # Ingredients
-(*.Ingredients*)
+(*Ingredients*)
 
 ## Overview
 
@@ -57,5 +57,8 @@ func main() {
 
 ### Response
 
-**[*operations.ListIngredientsResponse](../../models/operations/listingredientsresponse.md), error**
-
+**[*operations.ListIngredientsResponse](../../pkg/models/operations/listingredientsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 400-600            | */*                |

@@ -1,5 +1,5 @@
 # Config
-(*.Config*)
+(*Config*)
 
 ### Available Operations
 
@@ -46,10 +46,13 @@ func main() {
 | Parameter                                             | Type                                                  | Required                                              | Description                                           |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | `ctx`                                                 | [context.Context](https://pkg.go.dev/context#Context) | :heavy_check_mark:                                    | The context to use for the request.                   |
-| `request`                                             | [[]operations.RequestBody](../../models//.md)         | :heavy_check_mark:                                    | The request object to use for the request.            |
+| `request`                                             | [[]operations.RequestBody](../../.md)                 | :heavy_check_mark:                                    | The request object to use for the request.            |
 
 
 ### Response
 
-**[*operations.SubscribeToWebhooksResponse](../../models/operations/subscribetowebhooksresponse.md), error**
-
+**[*operations.SubscribeToWebhooksResponse](../../pkg/models/operations/subscribetowebhooksresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 400-600            | */*                |

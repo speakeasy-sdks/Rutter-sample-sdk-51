@@ -94,24 +94,24 @@ func main() {
 ## Available Resources and Operations
 
 
-### [.Authentication](docs/sdks/authentication/README.md)
+### [Authentication](docs/sdks/authentication/README.md)
 
 * [Authenticate](docs/sdks/authentication/README.md#authenticate) - Authenticate with the API by providing a username and password.
 
-### [.Drinks](docs/sdks/drinks/README.md)
+### [Drinks](docs/sdks/drinks/README.md)
 
 * [GetDrink](docs/sdks/drinks/README.md#getdrink) - Get a drink.
 * [ListDrinks](docs/sdks/drinks/README.md#listdrinks) - Get a list of drinks.
 
-### [.Ingredients](docs/sdks/ingredients/README.md)
+### [Ingredients](docs/sdks/ingredients/README.md)
 
 * [ListIngredients](docs/sdks/ingredients/README.md#listingredients) - Get a list of ingredients.
 
-### [.Orders](docs/sdks/orders/README.md)
+### [Orders](docs/sdks/orders/README.md)
 
 * [CreateOrder](docs/sdks/orders/README.md#createorder) - Create an order.
 
-### [.Config](docs/sdks/config/README.md)
+### [Config](docs/sdks/config/README.md)
 
 * [SubscribeToWebhooks](docs/sdks/config/README.md#subscribetowebhooks) - Subscribe to webhooks.
 <!-- End SDK Available Operations -->
@@ -131,7 +131,12 @@ Experience our SDK in an enhanced sandbox environment. Try it now in **GitHub Co
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 
 ## Example
@@ -162,6 +167,11 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 	}
 }
 
@@ -291,12 +301,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name     | Type     | Scheme   |
 | -------- | -------- | -------- |

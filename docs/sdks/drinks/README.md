@@ -1,5 +1,5 @@
 # Drinks
-(*.Drinks*)
+(*Drinks*)
 
 ## Overview
 
@@ -56,8 +56,11 @@ func main() {
 
 ### Response
 
-**[*operations.GetDrinkResponse](../../models/operations/getdrinkresponse.md), error**
-
+**[*operations.GetDrinkResponse](../../pkg/models/operations/getdrinkresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 400-600            | */*                |
 
 ## ListDrinks
 
@@ -100,10 +103,13 @@ func main() {
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `drinkType`                                                                  | [*shared.DrinkType](../../models/shared/drinktype.md)                        | :heavy_minus_sign:                                                           | The type of drink to filter by. If not provided all drinks will be returned. |
+| `drinkType`                                                                  | [*shared.DrinkType](../../../pkg/models/shared/drinktype.md)                 | :heavy_minus_sign:                                                           | The type of drink to filter by. If not provided all drinks will be returned. |
 
 
 ### Response
 
-**[*operations.ListDrinksResponse](../../models/operations/listdrinksresponse.md), error**
-
+**[*operations.ListDrinksResponse](../../pkg/models/operations/listdrinksresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 400-600            | */*                |

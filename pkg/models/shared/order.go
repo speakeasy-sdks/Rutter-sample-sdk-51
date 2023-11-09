@@ -7,37 +7,6 @@ import (
 	"fmt"
 )
 
-// OrderInput - An order for a drink or ingredient.
-type OrderInput struct {
-	// The product code of the drink or ingredient.
-	ProductCode string `json:"productCode"`
-	// The number of units of the drink or ingredient to order.
-	Quantity int64 `json:"quantity"`
-	// The type of order.
-	Type OrderType `json:"type"`
-}
-
-func (o *OrderInput) GetProductCode() string {
-	if o == nil {
-		return ""
-	}
-	return o.ProductCode
-}
-
-func (o *OrderInput) GetQuantity() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.Quantity
-}
-
-func (o *OrderInput) GetType() OrderType {
-	if o == nil {
-		return OrderType("")
-	}
-	return o.Type
-}
-
 // Status - The status of the order.
 type Status string
 

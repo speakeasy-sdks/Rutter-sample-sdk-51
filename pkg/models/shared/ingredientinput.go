@@ -2,39 +2,30 @@
 
 package shared
 
-type Ingredient struct {
+type IngredientInput struct {
 	// The name of the ingredient.
 	Name string `json:"name"`
 	// The product code of the ingredient, only available when authenticated.
 	ProductCode *string `json:"productCode,omitempty"`
-	// The number of units of the ingredient in stock, only available when authenticated.
-	Stock *int64 `json:"stock,omitempty"`
 	// The type of ingredient.
 	Type IngredientType `json:"type"`
 }
 
-func (o *Ingredient) GetName() string {
+func (o *IngredientInput) GetName() string {
 	if o == nil {
 		return ""
 	}
 	return o.Name
 }
 
-func (o *Ingredient) GetProductCode() *string {
+func (o *IngredientInput) GetProductCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ProductCode
 }
 
-func (o *Ingredient) GetStock() *int64 {
-	if o == nil {
-		return nil
-	}
-	return o.Stock
-}
-
-func (o *Ingredient) GetType() IngredientType {
+func (o *IngredientInput) GetType() IngredientType {
 	if o == nil {
 		return IngredientType("")
 	}
