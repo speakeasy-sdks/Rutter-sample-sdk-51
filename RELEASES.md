@@ -79,3 +79,13 @@ Based on:
 - [go v0.8.0] .
 ### Releases
 - [Go v0.8.0] https://github.com/speakeasy-sdks/Rutter-sample-sdk-51/releases/tag/v0.8.0 - .
+
+## 2023-11-10 01:01:11
+### Changes
+Based on:
+- OpenAPI Doc 1.0.0 
+- Speakeasy CLI 1.118.3 (2.187.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.8.1] .
+### Releases
+- [Go v0.8.1] https://github.com/speakeasy-sdks/Rutter-sample-sdk-51/releases/tag/v0.8.1 - .
