@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: abbc3a8faac54f76013e5d509a8d11ec
   docVersion: 1.0.0
-  speakeasyVersion: 1.118.3
-  generationVersion: 2.187.7
+  speakeasyVersion: 1.120.3
+  generationVersion: 2.192.1
 generation:
   comments: {}
   devContainers:
@@ -15,7 +15,7 @@ generation:
     optionalPropertyRendering: withExample
 features:
   go:
-    core: 3.1.4
+    core: 3.1.5
     devContainers: 2.90.0
     errors: 2.81.7
     examples: 2.81.3
@@ -25,7 +25,7 @@ features:
     inputOutputModels: 2.82.0
     serverIDs: 2.81.1
 go:
-  version: 0.8.1
+  version: 0.8.2
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:

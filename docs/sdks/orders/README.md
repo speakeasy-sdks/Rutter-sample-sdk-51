@@ -19,10 +19,10 @@ Create an order for a drink.
 package main
 
 import(
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"context"
 	"log"
-	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 )
 
 func main() {

@@ -19,10 +19,10 @@ Get a list of ingredients, if authenticated this will include stock levels and p
 package main
 
 import(
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"context"
 	"log"
-	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 )
 
 func main() {

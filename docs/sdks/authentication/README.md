@@ -19,11 +19,11 @@ Authenticate with the API by providing a username and password.
 package main
 
 import(
-	"context"
-	"log"
-	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
+	"context"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/operations"
+	"log"
 )
 
 func main() {
