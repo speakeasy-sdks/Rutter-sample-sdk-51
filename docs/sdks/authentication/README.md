@@ -28,7 +28,7 @@ import(
 
 func main() {
     s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity(""),
+        templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
     ctx := context.Background()

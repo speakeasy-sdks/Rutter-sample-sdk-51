@@ -199,7 +199,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(apiKey string) SDKOption {
 	return func(sdk *Speakeasy) {
 		security := shared.Security{APIKey: apiKey}
@@ -219,9 +218,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.8.3",
-			GenVersion:        "2.195.2",
-			UserAgent:         "speakeasy-sdk/go 0.8.3 2.195.2 1.0.0 github.com/speakeasy-sdks/template-speakeasy-bar",
+			SDKVersion:        "0.9.0",
+			GenVersion:        "2.213.3",
+			UserAgent:         "speakeasy-sdk/go 0.9.0 2.213.3 1.0.0 github.com/speakeasy-sdks/template-speakeasy-bar",
 			ServerDefaults: map[string]map[string]string{
 				"prod":    {},
 				"staging": {},

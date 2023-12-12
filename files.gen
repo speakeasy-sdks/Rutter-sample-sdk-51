@@ -43,7 +43,6 @@ pkg/utils/utils.go
 /pkg/models/sdkerrors/apierror.go
 /pkg/models/callbacks/createorder.go
 /pkg/models/webhooks/stockupdate.go
-USAGE.md
 docs/pkg/models/operations/authenticaterequestbody.md
 docs/pkg/models/operations/authenticateresponsebody.md
 docs/pkg/models/operations/authenticateresponse.md
@@ -81,6 +80,7 @@ docs/sdks/drinks/README.md
 docs/sdks/ingredients/README.md
 docs/sdks/orders/README.md
 docs/sdks/config/README.md
+USAGE.md
 .gitattributes
 .devcontainer/README.md
 .devcontainer/devcontainer.json

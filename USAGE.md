@@ -1,4 +1,4 @@
-<!-- Start SDK Example Usage -->
+<!-- Start SDK Example Usage [usage] -->
 ```go
 package main
 
@@ -10,9 +10,7 @@ import (
 )
 
 func main() {
-	s := templatespeakeasybar.New(
-		templatespeakeasybar.WithSecurity(""),
-	)
+	s := templatespeakeasybar.New()
 
 	var drinkType *shared.DrinkType = shared.DrinkTypeSpirit
 
@@ -28,4 +26,4 @@ func main() {
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->

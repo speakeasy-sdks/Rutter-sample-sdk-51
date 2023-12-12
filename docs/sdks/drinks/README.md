@@ -28,7 +28,7 @@ import(
 
 func main() {
     s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity(""),
+        templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
 
@@ -72,16 +72,14 @@ Get a list of drinks, if authenticated this will include stock levels and produc
 package main
 
 import(
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 	"context"
 	"log"
 )
 
 func main() {
-    s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity(""),
-    )
+    s := templatespeakeasybar.New()
 
 
     var drinkType *shared.DrinkType = shared.DrinkTypeSpirit
@@ -103,7 +101,7 @@ func main() {
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `drinkType`                                                                  | [*shared.DrinkType](../../../pkg/models/shared/drinktype.md)                 | :heavy_minus_sign:                                                           | The type of drink to filter by. If not provided all drinks will be returned. |
+| `drinkType`                                                                  | [*shared.DrinkType](../../pkg/models/shared/drinktype.md)                    | :heavy_minus_sign:                                                           | The type of drink to filter by. If not provided all drinks will be returned. |
 
 
 ### Response
