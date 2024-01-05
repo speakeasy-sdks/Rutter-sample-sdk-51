@@ -15,19 +15,19 @@ import (
 	"strings"
 )
 
-// The authentication endpoints.
-type authentication struct {
+// Authentication - The authentication endpoints.
+type Authentication struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newAuthentication(sdkConfig sdkConfiguration) *authentication {
-	return &authentication{
+func newAuthentication(sdkConfig sdkConfiguration) *Authentication {
+	return &Authentication{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Authenticate with the API by providing a username and password.
-func (s *authentication) Authenticate(ctx context.Context, request operations.AuthenticateRequestBody) (*operations.AuthenticateResponse, error) {
+func (s *Authentication) Authenticate(ctx context.Context, request operations.AuthenticateRequestBody) (*operations.AuthenticateResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/authenticate"
 
@@ -76,12 +76,12 @@ func (s *authentication) Authenticate(ctx context.Context, request operations.Au
 	case httpRes.StatusCode == 200:
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.Authenticate200ApplicationJSON
+			var out operations.AuthenticateResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Authenticate200ApplicationJSONObject = &out
+			res.Object = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

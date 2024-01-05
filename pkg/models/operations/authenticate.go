@@ -26,12 +26,12 @@ func (o *AuthenticateRequestBody) GetUsername() *string {
 	return o.Username
 }
 
-// Authenticate200ApplicationJSON - The api key to use for authenticated endpoints.
-type Authenticate200ApplicationJSON struct {
+// AuthenticateResponseBody - The api key to use for authenticated endpoints.
+type AuthenticateResponseBody struct {
 	Token *string `json:"token,omitempty"`
 }
 
-func (o *Authenticate200ApplicationJSON) GetToken() *string {
+func (o *AuthenticateResponseBody) GetToken() *string {
 	if o == nil {
 		return nil
 	}
@@ -48,7 +48,7 @@ type AuthenticateResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// The api key to use for authenticated endpoints.
-	Authenticate200ApplicationJSONObject *Authenticate200ApplicationJSON
+	Object *AuthenticateResponseBody
 }
 
 func (o *AuthenticateResponse) GetContentType() string {
@@ -79,9 +79,9 @@ func (o *AuthenticateResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *AuthenticateResponse) GetAuthenticate200ApplicationJSONObject() *Authenticate200ApplicationJSON {
+func (o *AuthenticateResponse) GetObject() *AuthenticateResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.Authenticate200ApplicationJSONObject
+	return o.Object
 }

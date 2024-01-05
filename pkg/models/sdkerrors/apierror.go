@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 )
 
+// APIError - An error occurred interacting with the API.
 type APIError struct {
 	Code    *string                `json:"code,omitempty"`
 	Details map[string]interface{} `json:"details,omitempty"`

@@ -15,19 +15,19 @@ import (
 	"strings"
 )
 
-type config struct {
+type Config struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newConfig(sdkConfig sdkConfiguration) *config {
-	return &config{
+func newConfig(sdkConfig sdkConfiguration) *Config {
+	return &Config{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // SubscribeToWebhooks - Subscribe to webhooks.
 // Subscribe to webhooks.
-func (s *config) SubscribeToWebhooks(ctx context.Context, request []operations.SubscribeToWebhooksRequestBody) (*operations.SubscribeToWebhooksResponse, error) {
+func (s *Config) SubscribeToWebhooks(ctx context.Context, request []operations.RequestBody) (*operations.SubscribeToWebhooksResponse, error) {
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/webhooks/subscribe"
 

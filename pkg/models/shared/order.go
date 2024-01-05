@@ -7,51 +7,20 @@ import (
 	"fmt"
 )
 
-// OrderInput - An order for a drink or ingredient.
-type OrderInput struct {
-	// The product code of the drink or ingredient.
-	ProductCode string `json:"productCode"`
-	// The number of units of the drink or ingredient to order.
-	Quantity int64 `json:"quantity"`
-	// The type of order.
-	Type OrderType `json:"type"`
-}
-
-func (o *OrderInput) GetProductCode() string {
-	if o == nil {
-		return ""
-	}
-	return o.ProductCode
-}
-
-func (o *OrderInput) GetQuantity() int64 {
-	if o == nil {
-		return 0
-	}
-	return o.Quantity
-}
-
-func (o *OrderInput) GetType() OrderType {
-	if o == nil {
-		return OrderType("")
-	}
-	return o.Type
-}
-
-// OrderStatus - The status of the order.
-type OrderStatus string
+// Status - The status of the order.
+type Status string
 
 const (
-	OrderStatusPending    OrderStatus = "pending"
-	OrderStatusProcessing OrderStatus = "processing"
-	OrderStatusComplete   OrderStatus = "complete"
+	StatusPending    Status = "pending"
+	StatusProcessing Status = "processing"
+	StatusComplete   Status = "complete"
 )
 
-func (e OrderStatus) ToPointer() *OrderStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *OrderStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -62,10 +31,10 @@ func (e *OrderStatus) UnmarshalJSON(data []byte) error {
 	case "processing":
 		fallthrough
 	case "complete":
-		*e = OrderStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for OrderStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
@@ -76,7 +45,7 @@ type Order struct {
 	// The number of units of the drink or ingredient to order.
 	Quantity int64 `json:"quantity"`
 	// The status of the order.
-	Status OrderStatus `json:"status"`
+	Status Status `json:"status"`
 	// The type of order.
 	Type OrderType `json:"type"`
 }
@@ -95,9 +64,9 @@ func (o *Order) GetQuantity() int64 {
 	return o.Quantity
 }
 
-func (o *Order) GetStatus() OrderStatus {
+func (o *Order) GetStatus() Status {
 	if o == nil {
-		return OrderStatus("")
+		return Status("")
 	}
 	return o.Status
 }
