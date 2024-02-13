@@ -82,7 +82,7 @@ func main() {
     s := templatespeakeasybar.New()
 
 
-    var drinkType *shared.DrinkType = shared.DrinkTypeSpirit
+    var drinkType *shared.DrinkType = shared.DrinkTypeSpirit.ToPointer()
 
     ctx := context.Background()
     res, err := s.Drinks.ListDrinks(ctx, drinkType)
