@@ -32,7 +32,7 @@ func main() {
     )
 
 
-    var name string = "string"
+    var name string = "<value>"
 
     ctx := context.Background()
     res, err := s.Drinks.GetDrink(ctx, name)
