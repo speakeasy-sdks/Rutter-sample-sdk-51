@@ -60,12 +60,12 @@ func (s *Orders) CreateOrder(ctx context.Context, requestBody []shared.OrderInpu
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
-
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
 	if err != nil {
 		return nil, err
 	}
+
+	client := s.sdkConfiguration.SecurityClient
 
 	httpRes, err := client.Do(req)
 	if err != nil || httpRes == nil {
@@ -88,7 +88,6 @@ func (s *Orders) CreateOrder(ctx context.Context, requestBody []shared.OrderInpu
 			return nil, err
 		}
 	}
-
 	contentType := httpRes.Header.Get("Content-Type")
 
 	res := &operations.CreateOrderResponse{

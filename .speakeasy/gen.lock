@@ -4,16 +4,16 @@ management:
   docChecksum: abbc3a8faac54f76013e5d509a8d11ec
   docVersion: 1.0.0
   speakeasyVersion: internal
-  generationVersion: 2.258.2
-  releaseVersion: 0.12.0
-  configChecksum: 89883a2c20f8c9ad89eeca6314d6df51
+  generationVersion: 2.263.3
+  releaseVersion: 0.12.1
+  configChecksum: fb14775aac3d3b161777b21c1d349bf9
   repoURL: https://github.com/speakeasy-sdks/Rutter-sample-sdk-51.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/Rutter-sample-sdk-51
   published: true
 features:
   go:
-    core: 3.4.0
+    core: 3.4.1
     devContainers: 2.90.0
     errors: 2.81.8
     examples: 2.81.3
@@ -31,7 +31,6 @@ generatedFiles:
   - config.go
   - speakeasy.go
   - go.mod
-  - go.sum
   - pkg/models/sdkerrors/sdkerror.go
   - pkg/types/bigint.go
   - pkg/types/date.go
