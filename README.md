@@ -49,16 +49,19 @@ servers:
 
 Once you're finished iterating and happy with the output push only the latest version of spec into the repo and regenerate the SDK using step 6 above. 
 
-<!-- Start SDK Installation -->
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 ```bash
-go get github.com/speakeasy-sdks/template-speakeasy-bar
+go get github.com/speakeasy-sdks/Rutter-sample-sdk-51
 ```
-<!-- End SDK Installation -->
+<!-- End SDK Installation [installation] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-<!-- Start SDK Example Usage -->
+
+### Example
+
 ```go
 package main
 
@@ -71,10 +74,10 @@ import (
 
 func main() {
 	s := templatespeakeasybar.New(
-		templatespeakeasybar.WithSecurity(""),
+		templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
 	)
 
-	var drinkType *shared.DrinkType = shared.DrinkTypeSpirit
+	var drinkType *shared.DrinkType = shared.DrinkTypeSpirit.ToPointer()
 
 	ctx := context.Background()
 	res, err := s.Drinks.ListDrinks(ctx, drinkType)
@@ -82,25 +85,20 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if res.Drinks != nil {
+	if res.Classes != nil {
 		// handle response
 	}
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->
 
-<!-- Start SDK Available Operations -->
+<!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
-
 
 ### [Authentication](docs/sdks/authentication/README.md)
 
 * [Authenticate](docs/sdks/authentication/README.md#authenticate) - Authenticate with the API by providing a username and password.
-
-### [Config](docs/sdks/config/README.md)
-
-* [SubscribeToWebhooks](docs/sdks/config/README.md#subscribetowebhooks) - Subscribe to webhooks.
 
 ### [Drinks](docs/sdks/drinks/README.md)
 
@@ -114,64 +112,64 @@ func main() {
 ### [Orders](docs/sdks/orders/README.md)
 
 * [CreateOrder](docs/sdks/orders/README.md#createorder) - Create an order.
-<!-- End SDK Available Operations -->
 
-<!-- Start Dev Containers -->
-# Dev Containers
-<div align="left">
-    <a href="https://codespaces.new/speakeasy-sdks/template-speakeasy-bar.git/tree/main"><img src="https://github.com/codespaces/badge.svg" /></a>
-    
-</div>
+### [Config](docs/sdks/config/README.md)
 
-Experience our SDK in an enhanced sandbox environment. Try it now in **GitHub Codespaces**!
+* [SubscribeToWebhooks](docs/sdks/config/README.md#subscribetowebhooks) - Subscribe to webhooks.
+<!-- End Available Resources and Operations [operations] -->
 
-* [Explore Dev Containers](.devcontainer/README.md)
-<!-- End Dev Containers -->
+<!-- Start Error Handling [errors] -->
+## Error Handling
 
-<!-- Start Error Handling -->
-# Error Handling
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
-
-## Example
+### Example
 
 ```go
 package main
 
 import (
 	"context"
+	"errors"
 	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/operations"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/sdkerrors"
 	"log"
 )
 
 func main() {
-	s := templatespeakeasybar.New(
-		templatespeakeasybar.WithSecurity(""),
-	)
+	s := templatespeakeasybar.New()
 
 	ctx := context.Background()
 	res, err := s.Authentication.Authenticate(ctx, operations.AuthenticateRequestBody{})
 	if err != nil {
 
-		var e *APIError
+		var e *sdkerrors.APIError
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 	}
 }
 
 ```
-<!-- End Error Handling -->
+<!-- End Error Handling [errors] -->
 
-<!-- Start Server Selection -->
-# Server Selection
+<!-- Start Server Selection [server] -->
+## Server Selection
 
-## Select Server by Name
+### Select Server by Name
 
 You can override the default server globally using the `WithServer` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
@@ -181,14 +179,7 @@ You can override the default server globally using the `WithServer` option when 
 | `staging` | `https://staging.speakeasy.bar` | None |
 | `customer` | `https://{organization}.{environment}.speakeasy.bar` | `environment` (default is `prod`), `organization` (default is `api`) |
 
-
-Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
- * `WithEnvironment ServerEnvironment`
-
- * `WithOrganization string`
-
-For example:
-
+#### Example
 
 ```go
 package main
@@ -197,13 +188,11 @@ import (
 	"context"
 	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/operations"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 	"log"
 )
 
 func main() {
 	s := templatespeakeasybar.New(
-		templatespeakeasybar.WithSecurity(""),
 		templatespeakeasybar.WithServer("customer"),
 	)
 
@@ -213,19 +202,22 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if res.Authenticate200ApplicationJSONObject != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }
 
 ```
 
+#### Variables
 
-## Override Server URL Per-Client
+Some of the server options above contain variables. If you want to set the values of those variables, the following options are provided for doing so:
+ * `WithEnvironment templatespeakeasybar.ServerEnvironment`
+ * `WithOrganization string`
+
+### Override Server URL Per-Client
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
-
-
 ```go
 package main
 
@@ -233,13 +225,11 @@ import (
 	"context"
 	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/operations"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 	"log"
 )
 
 func main() {
 	s := templatespeakeasybar.New(
-		templatespeakeasybar.WithSecurity(""),
 		templatespeakeasybar.WithServerURL("https://speakeasy.bar"),
 	)
 
@@ -249,16 +239,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if res.Authenticate200ApplicationJSONObject != nil {
+	if res.Object != nil {
 		// handle response
 	}
 }
 
 ```
-<!-- End Server Selection -->
+<!-- End Server Selection [server] -->
 
-<!-- Start Custom HTTP Client -->
-# Custom HTTP Client
+<!-- Start Custom HTTP Client [http-client] -->
+## Custom HTTP Client
 
 The Go SDK makes API calls that wrap an internal HTTP client. The requirements for the HTTP client are very simple. It must match this interface:
 
@@ -284,11 +274,54 @@ var (
 ```
 
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
-<!-- End Custom HTTP Client -->
+<!-- End Custom HTTP Client [http-client] -->
 
-<!-- Start Go Types -->
+<!-- Start Special Types [types] -->
+## Special Types
 
-<!-- End Go Types -->
+
+<!-- End Special Types [types] -->
+
+<!-- Start Authentication [security] -->
+## Authentication
+
+### Per-Client Security Schemes
+
+This SDK supports the following security scheme globally:
+
+| Name     | Type     | Scheme   |
+| -------- | -------- | -------- |
+| `APIKey` | apiKey   | API key  |
+
+You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
+```go
+package main
+
+import (
+	"context"
+	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/operations"
+	"log"
+)
+
+func main() {
+	s := templatespeakeasybar.New(
+		templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
+	)
+
+	ctx := context.Background()
+	res, err := s.Authentication.Authenticate(ctx, operations.AuthenticateRequestBody{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.Object != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

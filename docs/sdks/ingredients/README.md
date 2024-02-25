@@ -19,20 +19,20 @@ Get a list of ingredients, if authenticated this will include stock levels and p
 package main
 
 import(
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"context"
 	"log"
-	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 )
 
 func main() {
     s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity(""),
+        templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
 
     ingredients := []string{
-        "string",
+        "<value>",
     }
 
     ctx := context.Background()
@@ -41,7 +41,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.Ingredients != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -57,5 +57,8 @@ func main() {
 
 ### Response
 
-**[*operations.ListIngredientsResponse](../../models/operations/listingredientsresponse.md), error**
-
+**[*operations.ListIngredientsResponse](../../pkg/models/operations/listingredientsresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

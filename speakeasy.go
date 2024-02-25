@@ -6,6 +6,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/template-speakeasy-bar/internal/hooks"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/utils"
 	"net/http"
@@ -64,6 +65,7 @@ type sdkConfiguration struct {
 	GenVersion        string
 	UserAgent         string
 	RetryConfig       *utils.RetryConfig
+	Hooks             *hooks.Hooks
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
@@ -84,14 +86,14 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 // https://docs.speakeasy.bar - The Speakeasy Bar Documentation.
 type Speakeasy struct {
 	// The authentication endpoints.
-	Authentication *authentication
-	Config         *config
+	Authentication *Authentication
 	// The drinks endpoints.
-	Drinks *drinks
+	Drinks *Drinks
 	// The ingredients endpoints.
-	Ingredients *ingredients
+	Ingredients *Ingredients
 	// The orders endpoints.
-	Orders *orders
+	Orders *Orders
+	Config *Config
 
 	sdkConfiguration sdkConfiguration
 }
@@ -194,16 +196,24 @@ func WithClient(client HTTPClient) SDKOption {
 
 func withSecurity(security interface{}) func(context.Context) (interface{}, error) {
 	return func(context.Context) (interface{}, error) {
-		return &security, nil
+		return security, nil
 	}
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(apiKey string) SDKOption {
 	return func(sdk *Speakeasy) {
 		security := shared.Security{APIKey: apiKey}
 		sdk.sdkConfiguration.Security = withSecurity(&security)
+	}
+}
+
+// WithSecuritySource configures the SDK to invoke the Security Source function on each method call to determine authentication
+func WithSecuritySource(security func(context.Context) (shared.Security, error)) SDKOption {
+	return func(sdk *Speakeasy) {
+		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
+			return security(ctx)
+		}
 	}
 }
 
@@ -219,9 +229,9 @@ func New(opts ...SDKOption) *Speakeasy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.6.0",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.6.0 2.173.0 1.0.0 github.com/speakeasy-sdks/template-speakeasy-bar",
+			SDKVersion:        "0.7.0",
+			GenVersion:        "2.272.4",
+			UserAgent:         "speakeasy-sdk/go 0.7.0 2.272.4 1.0.0 github.com/speakeasy-sdks/template-speakeasy-bar",
 			ServerDefaults: map[string]map[string]string{
 				"prod":    {},
 				"staging": {},
@@ -230,6 +240,7 @@ func New(opts ...SDKOption) *Speakeasy {
 					"organization": "api",
 				},
 			},
+			Hooks: hooks.New(),
 		},
 	}
 	for _, opt := range opts {
@@ -240,6 +251,14 @@ func New(opts ...SDKOption) *Speakeasy {
 	if sdk.sdkConfiguration.DefaultClient == nil {
 		sdk.sdkConfiguration.DefaultClient = &http.Client{Timeout: 60 * time.Second}
 	}
+
+	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
+	serverURL := currentServerURL
+	serverURL, sdk.sdkConfiguration.DefaultClient = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.DefaultClient)
+	if serverURL != currentServerURL {
+		sdk.sdkConfiguration.ServerURL = serverURL
+	}
+
 	if sdk.sdkConfiguration.SecurityClient == nil {
 		if sdk.sdkConfiguration.Security != nil {
 			sdk.sdkConfiguration.SecurityClient = utils.ConfigureSecurityClient(sdk.sdkConfiguration.DefaultClient, sdk.sdkConfiguration.Security)
@@ -250,13 +269,13 @@ func New(opts ...SDKOption) *Speakeasy {
 
 	sdk.Authentication = newAuthentication(sdk.sdkConfiguration)
 
-	sdk.Config = newConfig(sdk.sdkConfiguration)
-
 	sdk.Drinks = newDrinks(sdk.sdkConfiguration)
 
 	sdk.Ingredients = newIngredients(sdk.sdkConfiguration)
 
 	sdk.Orders = newOrders(sdk.sdkConfiguration)
+
+	sdk.Config = newConfig(sdk.sdkConfiguration)
 
 	return sdk
 }
