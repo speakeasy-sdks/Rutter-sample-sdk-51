@@ -10,9 +10,7 @@ import (
 )
 
 func main() {
-	s := templatespeakeasybar.New(
-		templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
-	)
+	s := templatespeakeasybar.New()
 
 	var drinkType *shared.DrinkType = shared.DrinkTypeSpirit.ToPointer()
 

@@ -72,16 +72,14 @@ Get a list of drinks, if authenticated this will include stock levels and produc
 package main
 
 import(
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 	"context"
 	"log"
 )
 
 func main() {
-    s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
-    )
+    s := templatespeakeasybar.New()
 
 
     var drinkType *shared.DrinkType = shared.DrinkTypeSpirit.ToPointer()

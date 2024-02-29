@@ -145,7 +145,7 @@ func (s *Drinks) ListDrinks(ctx context.Context, drinkType *shared.DrinkType) (*
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "listDrinks",
-		SecuritySource: s.sdkConfiguration.Security,
+		SecuritySource: nil,
 	}
 
 	request := operations.ListDrinksRequest{
@@ -169,7 +169,7 @@ func (s *Drinks) ListDrinks(ctx context.Context, drinkType *shared.DrinkType) (*
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 	if err != nil {
