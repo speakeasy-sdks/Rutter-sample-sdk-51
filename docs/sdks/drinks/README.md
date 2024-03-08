@@ -39,7 +39,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Drink != nil {
         // handle response
     }
@@ -89,7 +88,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Classes != nil {
         // handle response
     }

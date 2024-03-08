@@ -15,7 +15,7 @@ generation:
   baseServerURL: ""
   telemetryEnabled: false
 go:
-  version: 0.8.0
+  version: 0.9.0
   additionalDependencies: {}
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
@@ -31,3 +31,4 @@ go:
   maxMethodParams: 4
   outputModelSuffix: output
   packageName: github.com/speakeasy-sdks/template-speakeasy-bar
+  responseFormat: envelope
