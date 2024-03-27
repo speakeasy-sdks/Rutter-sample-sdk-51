@@ -1,6 +1,4 @@
-<!-- Start SDK Example Usage -->
-
-
+<!-- Start SDK Example Usage [usage] -->
 ```go
 package main
 
@@ -12,22 +10,19 @@ import (
 )
 
 func main() {
-	s := templatespeakeasybar.New(
-		templatespeakeasybar.WithSecurity(""),
-	)
+	s := templatespeakeasybar.New()
 
-	var drinkType *shared.DrinkType = shared.DrinkTypeSpirit
+	var drinkType *shared.DrinkType = shared.DrinkTypeSpirit.ToPointer()
 
 	ctx := context.Background()
 	res, err := s.Drinks.ListDrinks(ctx, drinkType)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	if res.Drinks != nil {
+	if res.Classes != nil {
 		// handle response
 	}
 }
 
 ```
-<!-- End SDK Example Usage -->
+<!-- End SDK Example Usage [usage] -->

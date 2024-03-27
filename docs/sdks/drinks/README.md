@@ -20,26 +20,25 @@ Get a drink by name, if authenticated this will include stock levels and product
 package main
 
 import(
+	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"context"
 	"log"
-	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
 )
 
 func main() {
     s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity(""),
+        templatespeakeasybar.WithSecurity("<YOUR_API_KEY_HERE>"),
     )
 
 
-    var name string = "string"
+    var name string = "<value>"
 
     ctx := context.Background()
     res, err := s.Drinks.GetDrink(ctx, name)
     if err != nil {
         log.Fatal(err)
     }
-
     if res.Drink != nil {
         // handle response
     }
@@ -56,8 +55,11 @@ func main() {
 
 ### Response
 
-**[*operations.GetDrinkResponse](../../models/operations/getdrinkresponse.md), error**
-
+**[*operations.GetDrinkResponse](../../pkg/models/operations/getdrinkresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
 
 ## ListDrinks
 
@@ -69,27 +71,24 @@ Get a list of drinks, if authenticated this will include stock levels and produc
 package main
 
 import(
-	"context"
-	"log"
 	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	"context"
+	"log"
 )
 
 func main() {
-    s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity(""),
-    )
+    s := templatespeakeasybar.New()
 
 
-    var drinkType *shared.DrinkType = shared.DrinkTypeSpirit
+    var drinkType *shared.DrinkType = shared.DrinkTypeSpirit.ToPointer()
 
     ctx := context.Background()
     res, err := s.Drinks.ListDrinks(ctx, drinkType)
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.Drinks != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -100,10 +99,13 @@ func main() {
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `drinkType`                                                                  | [*shared.DrinkType](../../models/shared/drinktype.md)                        | :heavy_minus_sign:                                                           | The type of drink to filter by. If not provided all drinks will be returned. |
+| `drinkType`                                                                  | [*shared.DrinkType](../../pkg/models/shared/drinktype.md)                    | :heavy_minus_sign:                                                           | The type of drink to filter by. If not provided all drinks will be returned. |
 
 
 ### Response
 
-**[*operations.ListDrinksResponse](../../models/operations/listdrinksresponse.md), error**
-
+**[*operations.ListDrinksResponse](../../pkg/models/operations/listdrinksresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |

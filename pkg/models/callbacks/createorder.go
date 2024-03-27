@@ -46,12 +46,12 @@ func (o *CreateOrderOrderUpdateResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-type CreateOrderOrderUpdateRequestBodyInput struct {
+type CreateOrderOrderUpdateRequestBody struct {
 	// An order for a drink or ingredient.
 	Order *shared.OrderInput `json:"order,omitempty"`
 }
 
-func (o *CreateOrderOrderUpdateRequestBodyInput) GetOrder() *shared.OrderInput {
+func (o *CreateOrderOrderUpdateRequestBody) GetOrder() *shared.OrderInput {
 	if o == nil {
 		return nil
 	}

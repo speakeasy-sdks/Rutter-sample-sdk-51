@@ -19,25 +19,21 @@ Authenticate with the API by providing a username and password.
 package main
 
 import(
-	"context"
-	"log"
 	templatespeakeasybar "github.com/speakeasy-sdks/template-speakeasy-bar"
-	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/shared"
+	"context"
 	"github.com/speakeasy-sdks/template-speakeasy-bar/pkg/models/operations"
+	"log"
 )
 
 func main() {
-    s := templatespeakeasybar.New(
-        templatespeakeasybar.WithSecurity(""),
-    )
+    s := templatespeakeasybar.New()
 
     ctx := context.Background()
     res, err := s.Authentication.Authenticate(ctx, operations.AuthenticateRequestBody{})
     if err != nil {
         log.Fatal(err)
     }
-
-    if res.Authenticate200ApplicationJSONObject != nil {
+    if res.Object != nil {
         // handle response
     }
 }
@@ -45,13 +41,16 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.AuthenticateRequestBody](../../models/operations/authenticaterequestbody.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.AuthenticateRequestBody](../../pkg/models/operations/authenticaterequestbody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
 
 
 ### Response
 
-**[*operations.AuthenticateResponse](../../models/operations/authenticateresponse.md), error**
-
+**[*operations.AuthenticateResponse](../../pkg/models/operations/authenticateresponse.md), error**
+| Error Object       | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.APIError | 5XX                | application/json   |
+| sdkerrors.SDKError | 4xx-5xx            | */*                |
