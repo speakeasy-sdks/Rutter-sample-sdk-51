@@ -15,7 +15,7 @@ generation:
   baseServerURL: ""
   telemetryEnabled: false
 go:
-  version: 0.9.2
+  version: 0.9.3
   additionalDependencies: {}
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
